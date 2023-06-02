@@ -23,7 +23,7 @@
             <v-sheet rounded="lg" class="custom-sheet">
               <v-list rounded="lg" bg-color="#3A375C" base-color="#D0F69A">
                 <v-list-item to="/" link>
-                  <v-list-item-title>Home</v-list-item-title>
+                  <v-list-item-title @click="asyncFuntion()" >Home</v-list-item-title>
                 </v-list-item>
 
                 <v-list-item to="/abt" link>
@@ -77,6 +77,13 @@ export default {
       'Updates',
     ],
   }),
+}
+</script>
+
+<script setup>
+async function asyncFuntion() {
+  const result = await fetch("https://api.soundcloud.com/track,3&genres=Pop,House&access=playable&limit=3&linked_partitioning=trues?q=hello&ids=1,2")
+  console.log(result);
 }
 </script>
 
