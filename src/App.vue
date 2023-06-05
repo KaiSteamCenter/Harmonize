@@ -4,7 +4,7 @@
       <v-container class="fill-height d-flex align-center">
         <v-avatar class="me-10 ms-4" color="#CAF5A2" size="32"></v-avatar>
 
-        <v-btn v-for="link in links" :key="link" variant="text">
+        <v-btn>
           {{ link }}
         </v-btn>
 
@@ -23,10 +23,10 @@
             <v-sheet rounded="lg" class="custom-sheet">
               <v-list rounded="lg" bg-color="#3A375C" base-color="#D0F69A">
                 <v-list-item to="/" link>
-                  <v-list-item-title @click="asyncFuntion()" >Home</v-list-item-title>
+                  <v-list-item-title @click="asyncFuntion()">Home</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item to="/abt" link>
+                <v-list-item to="/discover" link>
                   <v-list-item-title>Discover</v-list-item-title>
                 </v-list-item>
 
@@ -37,10 +37,14 @@
                 <!--Divides Main Sections from bottom Section-->
                 <v-divider class="my-2"></v-divider>
 
-                <v-list-item link color="grey-lighten-4">
+                <v-list-item>
                   <v-list-item-title>
-                    Refresh
+                    <input type="text" v-model="query" placeholder="Enter search query" @keyup.enter="search">
                   </v-list-item-title>
+                </v-list-item>
+
+                <v-list-item v-for="result in results" :key="result.id" link>
+                  <v-list-item-title>{{ result.name }}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-sheet>
@@ -69,21 +73,30 @@
 
 <script>
 export default {
-  data: () => ({
-    links: [
-      'Dashboard',
-      'Messages',
-      'Profile',
-      'Updates',
-    ],
-  }),
-}
-</script>
-
-<script setup>
-async function asyncFuntion() {
-  const result = await fetch("https://api.soundcloud.com/track,3&genres=Pop,House&access=playable&limit=3&linked_partitioning=trues?q=hello&ids=1,2")
-  console.log(result);
+  data() {
+    return {
+      query: '',
+      results: []
+    };
+  },
+  methods: {
+    search() {
+      fetch(`https://freesound.org/apiv2/search/text/?query=${this.query}&token=mza7IVFXUJIu9hexCX0P0PgGiwrFZT6VO0oESxvM`)
+        .then(response => response.json())
+        .then(data => {
+          this.results = data.results;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    asyncFuntion() {
+      fetch("https://freesound.org/apiv2/search/text/?query=piano&token=mza7IVFXUJIu9hexCX0P0PgGiwrFZT6VO0oESxvM")
+        .then(response => {
+          console.log(response);
+        });
+    }
+  }
 }
 </script>
 
