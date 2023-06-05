@@ -34,18 +34,13 @@
                   <v-list-item-title>Library</v-list-item-title>
                 </v-list-item>
 
+                <v-list-item to="/search" link>
+                  <v-list-item-title>Search</v-list-item-title>
+                </v-list-item>
+
                 <!--Divides Main Sections from bottom Section-->
                 <v-divider class="my-2"></v-divider>
 
-                <v-list-item>
-                  <v-list-item-title>
-                    <input type="text" v-model="query" placeholder="Enter search query" @keyup.enter="search">
-                  </v-list-item-title>
-                </v-list-item>
-
-                <v-list-item v-for="result in results" :key="result.id" link>
-                  <v-list-item-title>{{ result.name }}</v-list-item-title>
-                </v-list-item>
               </v-list>
             </v-sheet>
           </v-col>
@@ -62,6 +57,9 @@
                     Discover, explore, and enjoy an unrivaled collection of music at your fingertips.
                   </p>
                 </v-card-text>
+                <v-list-item v-for="result in results" :key="result.id" link>
+                  <v-list-item-title>{{ result.name }}</v-list-item-title>
+                </v-list-item>
               </v-card>
             </v-sheet>
           </v-col>
@@ -72,32 +70,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      query: '',
-      results: []
-    };
-  },
-  methods: {
-    search() {
-      fetch(`https://freesound.org/apiv2/search/text/?query=${this.query}&token=mza7IVFXUJIu9hexCX0P0PgGiwrFZT6VO0oESxvM`)
-        .then(response => response.json())
-        .then(data => {
-          this.results = data.results;
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
-    asyncFuntion() {
-      fetch("https://freesound.org/apiv2/search/text/?query=piano&token=mza7IVFXUJIu9hexCX0P0PgGiwrFZT6VO0oESxvM")
-        .then(response => {
-          console.log(response);
-        });
-    }
-  }
-}
+
 </script>
 
 <style>

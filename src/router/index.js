@@ -12,7 +12,13 @@ const routes = [
     name: 'discover',
     component: AboutPage =>
     import(/* webpackChunkName: "about" */ '../views/AboutPage.vue')
- },
+   },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchPage =>
+      import(/* webpackChunkName: "home" */ '../views/SearchPage.vue')
+   },
 ]
 
 const router = createRouter({
