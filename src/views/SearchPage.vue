@@ -30,7 +30,7 @@ export default {
 <template>
 <v-list-item>
     <v-list-item-title>
-    <input type="text" v-model="query" placeholder="Enter search query" @keyup.enter="search">
+      <v-text-field v-model="searchText" label="Search" @keydown.enter="search" />
     </v-list-item-title>
 </v-list-item>
 </template>
