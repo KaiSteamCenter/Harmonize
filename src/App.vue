@@ -47,20 +47,7 @@
 
           <v-col>
             <v-sheet min-height="70vh" rounded="lg">
-              <v-card>
-                <v-card-title>
-                  <h1 class="display-1">Welcome to Harmonize, the Future of Music</h1>
-                </v-card-title>
-                <v-card-text>
-                  <p class="subtitle-1">
-                    We are excited to introduce a new era in music streaming.
-                    Discover, explore, and enjoy an unrivaled collection of music at your fingertips.
-                  </p>
-                </v-card-text>
-                <v-list-item v-for="result in results" :key="result.id" link>
-                  <v-list-item-title>{{ result.name }}</v-list-item-title>
-                </v-list-item>
-              </v-card>
+              <router-view/>
             </v-sheet>
           </v-col>
         </v-row>
